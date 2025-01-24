@@ -30,9 +30,12 @@ ruff = "^0.7.4"
 typing-extensions = ">=4.5.0"
 uvicorn = "^0.32.0"
 
+
+[tool.pdm.build]
+includes = []
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
 
 [tool.mypy]
 strict = true
@@ -72,3 +75,43 @@ test = "python -m pytest tests --random-order"
 static-checks.sequence = ["lint", "check-format", "mypy"]
 static-checks.ignore_fail = "return_non_zero"
 serve-docs = "mkdocs serve"
+
+[project]
+authors = [
+    {name = "Peter Volf", email = "do.volfp@gmail.com"},
+]
+license = {text = "MIT"}
+requires-python = "<4.0,>=3.10"
+dependencies = [
+    "fastapi>=0.100.0",
+    "jinja2>=3.1.5",
+    "uvicorn>=0.34.0",
+]
+name = "fasthx"
+version = "2.1.1"
+description = "FastAPI server-side rendering with built-in HTMX support."
+readme = "README.md"
+
+[project.optional-dependencies]
+htmy = [
+    "htmy>=0.3.4",
+]
+jinja = [
+    "jinja2<4.0.0,>=3.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "htmy>=0.3.4",
+    "httpx<1.0.0,>=0.26.0",
+    "jinja2<4.0.0,>=3.0.0",
+    "mkdocs-material<10.0.0,>=9.5.32",
+    "mkdocstrings[python]<1.0.0,>=0.25.2",
+    "mypy<2.0.0,>=1.13.0",
+    "poethepoet<1.0.0,>=0.30.0",
+    "pytest<9.0.0,>=8.3.3",
+    "pytest-random-order<2.0.0,>=1.1.1",
+    "ruff<1.0.0,>=0.7.4",
+    "typing-extensions>=4.5.0",
+    "uvicorn<1.0.0,>=0.32.0",
+]

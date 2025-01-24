@@ -5,6 +5,7 @@ from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
 from fasthx import Jinja
+import uvicorn
 
 
 # Pydantic model of the data the example API is using.
@@ -48,3 +49,11 @@ def htmx_only() -> list[User]:
 def index() -> None:
     """This route serves the index.html template."""
     ...
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app)
+
+
