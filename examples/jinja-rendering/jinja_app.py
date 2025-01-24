@@ -28,13 +28,22 @@ jinja = Jinja(templates)
 
 @app.get("/user-list")
 @jinja.hx("user-list.html")  # Render the response with the user-list.html template.
-def htmx_or_data(response: Response) -> tuple[User, ...]:
-    """This route can serve both JSON and HTML, depending on if the request is an HTMX request or not."""
+def htmx_or_data(response: Response) -> dict:
     response.headers["my-response-header"] = "works"
-    return (
-        User(first_name="Peter", last_name="Volf"),
-        User(first_name="Hasan", last_name="Tasan"),
-    )
+    return {
+        "users": (
+            User(first_name="Peter", last_name="Volfxxxxx"),
+            User(first_name="Hasan", last_name="Tasan"),
+        ),
+        "extra_info": "This is extra context data!"
+    }
+# def htmx_or_data(response: Response) -> tuple[User, ...]:
+#     """This route can serve both JSON and HTML, depending on if the request is an HTMX request or not."""
+#     response.headers["my-response-header"] = "works"
+#     return (
+#         User(first_name="Peter", last_name="Volf"),
+#         User(first_name="Hasan", last_name="Tasan"),
+#     )
 
 
 @app.get("/admin-list")
