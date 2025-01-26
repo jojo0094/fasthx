@@ -1,0 +1,11 @@
+{% if selected_country %}
+    <p>You selected: {{ selected_country }}</p>
+{% endif %}
+
+<select id="city-select" name="city">
+    <option value="">Select a city</option>
+    {% for city in cities %}
+        <option value="{{ city }}">{{ city }}</option>
+    {% endfor %}
+</select>
+

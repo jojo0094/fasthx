@@ -3,3 +3,12 @@
         <li class="list-group-item"> {{user.first_name}} {{user.last_name}}</li>
     {% endfor %}
 </ul>
+<p>{{ extra_info }}</p>
+
+<!-- implement cascase filter below  -->
+<!-- <select id="country" name="country" class="form-select" hx-get="/get-cities" hx-trigger="change" hx-target="#city"> -->
+<!--    <option value="">Select Country</option>-->
+<!--    {% for country in countries %}-->
+<!--        <option value="{{ country }}">{{ country }}</option>-->
+<!--    {% endfor %}-->
+<!--</select>-->

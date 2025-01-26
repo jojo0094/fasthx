@@ -1,0 +1,19 @@
+
+<p>Select a country:</p>
+<select 
+    id="country-select" 
+    name="country" 
+    hx-get="/get-cities" 
+    hx-target="#city-container" 
+    hx-params="*">
+    <option value="">Select a country</option>
+    {% for country in countries %}
+        <option value="{{ country }}">{{ country }}</option>
+    {% endfor %}
+</select>
+
+<div id="city-container">
+    <!-- Cities will load here dynamically -->
+</div>
+
+

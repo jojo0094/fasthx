@@ -5,7 +5,6 @@ from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
 from fasthx import Jinja
-import uvicorn
 
 
 # Pydantic model of the data the example API is using.
@@ -52,6 +51,28 @@ def htmx_only() -> list[User]:
     """This route can only serve HTML, because the no_data parameter is set to True."""
     return [User(first_name="John", last_name="Doe")]
 
+# Example data (you can replace this with actual data source)
+countries_and_cities = {
+    "USA": ["New York", "Los Angeles", "Chicago"],
+    "Canada": ["Toronto", "Vancouver", "Montreal"],
+    "Germany": ["Berlin", "Munich", "Frankfurt"]
+}
+@app.get("/get-countries")
+@jinja.hx("dropdown.html")  # Render the response with the countries.html template
+def get_countries(response: Response) -> dict:
+    response.headers["my-response-header"] = "works"
+    countries = list(countries_and_cities.keys())
+    return {"countries": countries}
+
+@app.get("/get-cities") # dont need to pass param as it is dynamically passed using hx-param:w
+@jinja.hx("cities.html")  # Render the response with the cities.html template
+def get_cities(response: Response, country: str) -> dict:
+    response.headers["my-response-header"] = "works"
+    if country:
+        cities = countries_and_cities.get(country, [])
+        return {"cities": cities, "selected_country": country}
+    else:
+        return {"cities": [], "selected_country": "No country selected"}
 
 @app.get("/")
 @jinja.page("index.html")
