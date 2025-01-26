@@ -64,7 +64,7 @@ def get_countries(response: Response) -> dict:
     countries = list(countries_and_cities.keys())
     return {"countries": countries}
 
-@app.get("/get-cities") # dont need to pass param as it is dynamically passed using hx-param:w
+@app.get("/get-cities") # dont need to pass param as it is dynamically passed using hx-param# update commit message
 @jinja.hx("cities.html")  # Render the response with the cities.html template
 def get_cities(response: Response, country: str) -> dict:
     response.headers["my-response-header"] = "works"
